@@ -141,8 +141,7 @@ export class PolarisTileCard extends LitElement {
   }
 
   render() {
-    const hasLink = this.hasAttribute('link');
-    const svgLink = new URL('../assets/image.svg', import.meta.url).href;
+    const hasLink = this.hasAttribute('link'); 
     const hasSubText = this.hasAttribute('subtext'); 
 
 

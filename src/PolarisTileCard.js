@@ -4,11 +4,11 @@ export class PolarisTileCard extends LitElement {
   static get properties() { 
   
     return {
-      title: { type: String },
-      color: { type: String },
-      link: { type: String },
-      cardimage: { type: String },
-      subtext: { type: String }, 
+      title: { type: String, reflect : true },
+      color: { type: String, reflect : true },
+      link: { type: String, reflect : true },
+      cardimage: { type: String, reflect : true },
+      subtext: { type: String, reflect : true }, 
       blockone: {type: Boolean, reflect : true}, 
       blocktwo: {type: Boolean, reflect : true}, 
       blockthree: {type: Boolean, reflect : true}, 
@@ -17,35 +17,38 @@ export class PolarisTileCard extends LitElement {
     };
   }
 
-  static get styles() {
+   static get styles() {
     return css`
       :host {
-      
+        display: grid;
+        font-family: "Roboto", "Franklin Gothic Medium";
+        --navy-blue: #001836;
+        --blue: #1e407c;
+        --fade: linear-gradient(180deg, rgba(30,64,124,1) 0%, rgba(0,30,68,1) 65%, rgba(0,30,68,1) 100%);
       }
 
-  
+      .card-title {
+        font-weight: bold;
+        width: 75%;
+        max-height: 100%;
+        overflow: hidden;
+      }
 
       .subtext {
-        font-size: 1rem;
+        font-size: 16px;
         overflow: hidden; 
       }
     
       .card {
         background-color: #fff;
+        color: #fff; 
+        height: 42vh; 
         box-shadow: 0 8px 16px 0 rgba(0,3,33,.1);
         align-items: center;
         display: flex;
-        justify-content: start; 
-        padding: 16px; 
-        height: 350px; 
-        width: 350px;
-        gap: 16px;
+        justify-content: center;
         background-image: url(var(--card-background-image));
         position: relative;
-      } 
-      .card-title { 
-        font-weight: bold; 
-        
       }
 
       .link {
@@ -68,26 +71,28 @@ export class PolarisTileCard extends LitElement {
         transition: all .25s ease-in-out;
         transform-origin: bottom right;
       }
-
-       .card[card-color="blue"] {
-        background-color: #1e407c;
-        color: #fff;
+      .card[card-color="blue"] {
+        background-color: var(--blue);
       }
 
       .card[card-color="fade"] {
-        background: linear-gradient(180deg, rgba(30,64,124,1) 0%, rgba(0,30,68,1) 65%, rgba(0,30,68,1) 100%);;
-        color: #fff;
+        background: var(--fade);
       }
 
       .card[card-color="navy"] {
-        background-color: #001836;
-        color: #fff;
+        background-color: var(--navy-blue);
       }
+
+      .card[card-color="white"] {
+        background-color: #fff;
+        color: var(--navy-blue);
+      }
+      
       .white-hr {
         height: 4px;
         border: none;
         border-radius: 4px;
-        background-color: #1e407c;
+        background-color: var(--blue);
       }
 
       .white-text-wrapper {
@@ -96,30 +101,8 @@ export class PolarisTileCard extends LitElement {
         width: 75%;
         overflow: hidden;
       }
-      .card-wrap-outer{ 
-        width: fit-content; 
-        
-      }
-      @media (min-width: 10px) {
-        .card {
-          height: 45vw;
-        }
-        .card-title {
-          font-size: 1.5rem;
-        }
-      } 
+
       
-
-      @media (min-width: 768px) {
-        .card {
-          height: 36vw;
-          flex: 0 0 48%;
-        }
-        .card-title {
-          font-size: 2rem;
-        }
-      }
-
       @media (min-width: 1080px) {
         .card {
           height: 24vw;
@@ -129,6 +112,27 @@ export class PolarisTileCard extends LitElement {
           font-size: 2.5rem;
         }
       }
+      @media (min-width: 768px) {
+        .card {
+          height: 45vw;
+        }
+        .card-title {
+          font-size: 24px;
+        }
+      } 
+      
+
+      @media (min-width: 1080px) {
+        .card {
+          height: 24vw;
+          flex: 0 0 32%;
+        }
+        .card-title {
+          font-size: 40px;
+        }
+      }
+
+      
     `;
   }
 
@@ -153,7 +157,7 @@ export class PolarisTileCard extends LitElement {
 
           <div class="card" card-title="${this.title}" card-color="${this.color}" style="background-image: linear-gradient(to right, rgba(0, 3, 33, 0.5), rgba(0, 3, 33, 0.5)), url(${this.cardimage})">
           <div class="card-title">${this.title}</div>  
-         <a class = "svg-link"> <svg width="24" height="24" viewBox="0 0 24 24" fill="#CCE9FF">
+         <a class = "svg-link" href = "${this.link}"> <svg width="24" height="24" viewBox="0 0 24 24" fill="#CCE9FF">
           <path d="M4.22 22C3.61 22 3.09 21.78 2.65 21.35C2.22 20.91 2 20.39 2 19.78V4.22C2
                                  3.61 2.22 3.09 2.65 2.65C3.09 2.22 3.61 2 4.22 2H10.89C11.20 2 11.47 2.11 11.68 
                                  2.32C11.89 2.53 12 2.80 12 3.11C12 3.43 11.89 3.69 11.68 3.90C11.47 4.11 11.20 4.22 10.89 
@@ -197,3 +201,4 @@ export class PolarisTileCard extends LitElement {
   }
 }
 }
+ 
